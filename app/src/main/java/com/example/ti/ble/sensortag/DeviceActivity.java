@@ -88,6 +88,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ti.ble.common.BluetoothLeService;
@@ -208,7 +209,7 @@ public class DeviceActivity extends ViewPagerActivity implements
 
 		// Initialize sensor list
 		updateSensorList();
-        TestAlert("OnCreate");
+        //TestAlert("OnCreate");
 
 	}
 
@@ -751,10 +752,15 @@ public class DeviceActivity extends ViewPagerActivity implements
         AlertDialog theAlertDialog = builder.create();
         theAlertDialog.show();
     }
+    String name;
+    String person_id;
 
+    private void sendTempAndLoc( String id, double temp, double lati, double longi, double humid, String name, String perID ){
+//
+//        if(pid.length() == 0){
+//            pid = "noName";
+//        }
 
-    private void sendTempAndLoc(String id, double temp, double lati, double longi, double humid){
-        HttpClient httpClient = new DefaultHttpClient();
         String url = "https://hacksc-iris.azure-mobile.net/api/temperature?";
 
         List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
@@ -762,40 +768,36 @@ public class DeviceActivity extends ViewPagerActivity implements
         temp = ((temp * 9 / 5.0) + 32); //changing the temp from celsius to fahrenheit
 
         params.add(new BasicNameValuePair("lat", String.valueOf(lati)));
-        params.add(new BasicNameValuePair("long", String.valueOf(longi)));
-        params.add(new BasicNameValuePair("device_id", id));
+        params.add(new BasicNameValuePair("longi", String.valueOf(longi)));
+        params.add(new BasicNameValuePair("device_id", String.valueOf(id)));
+        params.add(new BasicNameValuePair("person_id", String.valueOf(perID)));
         params.add(new BasicNameValuePair("temp", String.valueOf(temp)));
         params.add(new BasicNameValuePair("humid", String.valueOf(humid)));
+        params.add(new BasicNameValuePair("name", String.valueOf(name)));
 
         String paramString = URLEncodedUtils.format(params, "utf-8");
 
         url += paramString;
 
-
-        //HttpPost httpPost = new HttpPost("https://hacksc-iris.azure-mobile.net/api/temperature?device_id=mikeyoon&temp=97&lat=38&long=88");
         HttpPost httpPost = new HttpPost(url);
-        //temp=11&long=22&lat=55
-        //InputStream inputStream = null;
-        //String result;
         new MyHttpPost().execute(httpPost);
-//        try{
-//            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-//            nameValuePairs.add(new BasicNameValuePair("device_id", id));
-//            nameValuePairs.add(new BasicNameValuePair("temp", Double.toString(temp)));
-//            nameValuePairs.add(new BasicNameValuePair("lat", Double.toString(lati)));
-//            nameValuePairs.add(new BasicNameValuePair("long", Double.toString(longi)));
-//
-//            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//            new MyHttpPost().execute(httpPost);
-//
-//        }catch(IOException e) {
-//
-//            TestAlert("Send fail");
-//        }
+
     }
+    public void sendButtonOnClick(View view){
+        androidId = Secure.getString( getContentResolver(), Secure.ANDROID_ID);
+//        EditText personName = (EditText) findViewById(R.id.personNameET);
+//        String personId = personName.getText().toString();
+        EditText name1 = (EditText) findViewById(R.id.txtname);
+        EditText person_id1 = (EditText) findViewById(R.id.txtperID);
+        name= name1.getText().toString();
+        person_id =person_id1.getText().toString();
 
+        sendTempAndLoc(androidId, currTemp, currLati, currLongi, humid, name, person_id);
 
+        name1.setText("");
+        person_id1.setText("");
+
+    }
 
     private class MyHttpPost extends AsyncTask<HttpPost, Void, String> {
 
@@ -807,21 +809,6 @@ public class DeviceActivity extends ViewPagerActivity implements
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            //Toast.makeText( getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
-            /*try{
-                JSONObject jsonLoginResult = new JSONObject(result);
-                if( jsonLoginResult.getBoolean("success") ){
-                    //will save our auth_token in our SharedPreferences
-                    //SharedPreferences.Editor preferencesEditor = savedData.edit();
-                    //preferencesEditor.putString("auth_token", jsonLoginResult.getJSONObject("user").getString("auth_token"));
-                }
-                else{
-                    //invalidEntryAlert("Invalid username or password. Please try again.");
-                }
-            }
-            catch(JSONException e){
-                //do nothing
-            }*/
 
             TestAlert(result);
 
@@ -865,9 +852,6 @@ public class DeviceActivity extends ViewPagerActivity implements
         }
     }
 
-    public void sendButtonOnClick(View view){
-        androidId = Secure.getString( getContentResolver(), Secure.ANDROID_ID);
-        sendTempAndLoc(androidId, currTemp, currLati, currLongi, humid);
-    }
+
 
 }

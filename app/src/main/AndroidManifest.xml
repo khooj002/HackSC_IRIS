@@ -10,19 +10,24 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <uses-sdk
         android:minSdkVersion="18"
         android:targetSdkVersion="19" />
-    
+
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
 
+
     <application
         android:allowBackup="false"
         android:icon="@drawable/tible"
-        android:label="@string/app_name" 
+        android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <service
             android:name="com.example.ti.ble.common.BluetoothLeService"
@@ -32,41 +37,45 @@
             android:name="com.example.ti.ble.sensortag.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
         <activity
             android:name="com.example.ti.ble.sensortag.DeviceActivity"
-            android:parentActivityName="MainActivity"
+            android:parentActivityName="com.example.ti.ble.sensortag.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.ti.ble.sensortag.ServiceActivity"
-            android:parentActivityName="DeviceActivity"
+            android:parentActivityName="com.example.ti.ble.sensortag.DeviceActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.ti.ble.sensortag.FwUpdateActivity"
-            android:parentActivityName="DeviceActivity"
+            android:parentActivityName="com.example.ti.ble.sensortag.DeviceActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.ti.ble.sensortag.FileActivity"
-            android:parentActivityName="FwUpdateActivity"
+            android:parentActivityName="com.example.ti.ble.sensortag.FwUpdateActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.ti.ble.sensortag.PreferencesActivity"
-            android:parentActivityName="DeviceActivity"
-            android:screenOrientation="portrait"
-            android:label="Preferences"/>
-
+            android:label="Preferences"
+            android:parentActivityName="com.example.ti.ble.sensortag.DeviceActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        
-    </application>
 
+        <activity
+            android:name="com.example.ti.ble.sensortag.SplashScreen"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>

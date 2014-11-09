@@ -34,11 +34,29 @@
             <TextView android:layout_span="1" />
         </TableRow>
 
-        <TableRow style="@style/ServiceHeaderRow" >
 
-            <TextView
-                style="@style/ServiceHeaderItem"
-                android:text="@string/acc" />
+
+            <EditText
+                android:layout_width="269dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/txtname"
+                android:layout_column="0"
+                android:layout_span="3"
+                android:textColorHint="@color/common_signin_btn_light_text_default"
+                android:hint="NAME" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/txtperID"
+                android:layout_column="0"
+                android:layout_span="3"
+                android:textColorHint="@color/common_signin_btn_light_text_focused"
+                android:hint="ID" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -48,80 +66,12 @@
                 android:id="@+id/button"
                 android:layout_column="3"
                 android:onClick="sendButtonOnClick" />
-        </TableRow>
+
 
         <TableRow
             android:id="@+id/accPanel"
             style="@style/ServiceRow" >
 
-            <TextView android:drawableLeft="@drawable/accelerometer" />
-
-            <TextView
-                style="@style/ServiceItem"
-                android:text="@string/xyz3" />
-
-            <TextView
-                android:id="@+id/accelerometerTxt"
-                style="@style/ServiceItemValue"
-                android:text="@string/empty3" />
-
-            <TextView
-                style="@style/ServiceItem"
-                android:text="@string/unitG3" />
-        </TableRow>
-
-        <TableRow style="@style/ServiceHeaderRow" >
-
-            <TextView
-                style="@style/ServiceHeaderItem"
-                android:text="@string/mag" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/magPanel"
-            style="@style/ServiceRow" >
-
-            <TextView android:drawableLeft="@drawable/sensortag_magnetometer" />
-
-            <TextView
-                style="@style/ServiceItem"
-                android:text="@string/xyz3" />
-
-            <TextView
-                android:id="@+id/magnetometerTxt"
-                style="@style/ServiceItemValue"
-                android:text="@string/empty3" />
-
-            <TextView
-                style="@style/ServiceItem"
-                android:text="@string/unitT3" />
-        </TableRow>
-        
-        <TableRow style="@style/ServiceHeaderRow" >
-
-            <TextView
-                style="@style/ServiceHeaderItem"
-                android:text="@string/gyro" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/gyrPanel"
-            style="@style/ServiceRow" >
-
-            <TextView android:drawableLeft="@drawable/gyroscope" />
-
-            <TextView
-                style="@style/ServiceItem"
-                android:text="@string/xyz3" />
-
-            <TextView
-                android:id="@+id/gyroscopeTxt"
-                style="@style/ServiceItemValue"
-                android:text="@string/empty3" />
-
-            <TextView
-                style="@style/ServiceItem"
-                android:text="@string/unitDegSec3" />
         </TableRow>
 
         <TableRow style="@style/ServiceHeaderRow" >
@@ -205,6 +155,60 @@
 
             <TextView
                 style="@style/ServiceHeaderItem"
+                android:text="@string/mag" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/magPanel"
+            style="@style/ServiceRow" >
+
+            <TextView android:drawableLeft="@drawable/sensortag_magnetometer" />
+
+            <TextView
+                style="@style/ServiceItem"
+                android:text="@string/xyz3" />
+
+            <TextView
+                android:id="@+id/magnetometerTxt"
+                style="@style/ServiceItemValue"
+                android:text="@string/empty3" />
+
+            <TextView
+                style="@style/ServiceItem"
+                android:text="@string/unitT3" />
+        </TableRow>
+
+        <TableRow style="@style/ServiceHeaderRow" >
+
+            <TextView
+                style="@style/ServiceHeaderItem"
+                android:text="@string/gyro" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/gyrPanel"
+            style="@style/ServiceRow" >
+
+            <TextView android:drawableLeft="@drawable/gyroscope" />
+
+            <TextView
+                style="@style/ServiceItem"
+                android:text="@string/xyz3" />
+
+            <TextView
+                android:id="@+id/gyroscopeTxt"
+                style="@style/ServiceItemValue"
+                android:text="@string/empty3" />
+
+            <TextView
+                style="@style/ServiceItem"
+                android:text="@string/unitDegSec3" />
+        </TableRow>
+
+        <TableRow style="@style/ServiceHeaderRow" >
+
+            <TextView
+                style="@style/ServiceHeaderItem"
                 android:text="@string/bar" />
         </TableRow>
 
@@ -227,6 +231,6 @@
                 style="@style/ServiceItem"
                 android:text="@string/unitPA_Meter" />
         </TableRow>
-        
+
         </TableLayout>
 </ScrollView>

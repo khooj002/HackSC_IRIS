@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Main activity -->
-    <string name="app_name">BLE SensorTag</string>
+    <string name="app_name">HealthTag</string>
     <string name="button_scan">Scan</string>
     <string name="connect">Connect</string>
     <string name="title_device_list">Device List</string>
@@ -15,12 +15,18 @@
     <string name="bt_on">Bluetooth was turned  on</string>
     <string name="bt_not_on">Bluetooth was not turned on</string>
     <string name="app_closing">Exiting BLE SensorTag app</string>
-    <string-array name="device_filter"><item>SensorTag</item><item>SensorTag2</item></string-array>    
+
+    <!-- Do not edit! -->
+    <string-array name="device_filter">
+        <item>SensorTag</item>
+        <item>SensorTag2</item>
+    </string-array>
+
     <string name="nodevice">There are no SensorTags advertising within range. Please push the side button on the SensorTag to start advertising.</string>
     <string name="scan_advice">The Android device is not scanning. Please tap \'Scan\' to scan for SensorTags.</string>
     <string name="bt_adapter_disable">Disable Bluetooth adapter</string>
     <string name="bt_adapter_reset">Reset Bluetooth adapter</string>
-    
+
     <!-- Options menu -->
     <string name="prefs">Preferences</string>
     <string name="progress"></string>
@@ -36,8 +42,8 @@
     <!-- Device activity -->
     <string name="dev_addr">Device address</string>
     <string name="image">Image</string>
-    
-    <!-- Sensor names-->
+
+    <!-- Sensor names -->
     <string name="keys">Keys</string>
     <string name="acc">Accelerometer</string>
     <string name="mag">Magnetometer</string>
@@ -54,7 +60,6 @@
     <string name="unitDegSec3">deg/s\ndeg/s\ndeg/s\n</string>
     <string name="unitG3">g\ng\ng\n</string>
     <string name="unitT3">uT\nuT\nuT\n</string>
-    
     <string name="empty1">*\n*\n</string>
     <string name="unitDeg">deg/F\n</string>
     <string name="degree1">Long deg\nLat deg\n</string>
@@ -62,7 +67,7 @@
     <string name="unitRH">%rH\n</string>
     <string name="unitPA_Meter">nPA\nmeter</string>
     <string name="unitLux">Lux\n</string>
-    
+
     <!-- FWUpdate activity -->
     <string name="title_oad">Firmware Update (OAD)</string>
     <string name="start_prog">Start Programming</string>
@@ -77,5 +82,11 @@
     <string name="cur_image">Current image:</string>
     <string name="idle">idle</string>
     <string name="btn_txt_confirm">Confirm</string>
+    <string name="title_activity_splacescreen">splacescreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
