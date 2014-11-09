@@ -6,4 +6,4 @@
     <ProgressBar android:layout_width="32dp"
        android:layout_height="32dp"
        android:layout_gravity="center"/>
-</FrameLayout><!-- From: file:/Users/justinkhoo/Downloads/sensortag-android/app/src/main/res/layout/frame_progress.xml -->
+</FrameLayout><!-- From: file:/Users/justinkhoo/HackSC_IRIS/app/src/main/res/layout/frame_progress.xml -->

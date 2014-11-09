@@ -6,28 +6,28 @@
         jumboMode="false"
         revision="20.0.0"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
-        <dex dex="/Users/justinkhoo/Downloads/sensortag-android/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-ad9c6bc99aaf65f25d30022e7e68faa4a8da81bf.jar" />
+        <dex dex="/Users/justinkhoo/HackSC_IRIS/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-ad9c6bc99aaf65f25d30022e7e68faa4a8da81bf.jar" />
     </item>
     <item
-        jar="/Users/justinkhoo/Downloads/sensortag-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
+        jar="/Users/justinkhoo/HackSC_IRIS/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
-        <dex dex="/Users/justinkhoo/Downloads/sensortag-android/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-caed683af2352b4f54c79078da641e4b7137556a.jar" />
+        <dex dex="/Users/justinkhoo/HackSC_IRIS/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-3bf66668be896f1dac3e2dc75f0739dba1ead16a.jar" />
     </item>
     <item
-        jar="/Users/justinkhoo/Downloads/sensortag-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
-        <dex dex="/Users/justinkhoo/Downloads/sensortag-android/app/build/intermediates/pre-dexed/debug/classes-faa4be85a25e694a2e4928d6f6f089411f92c209.jar" />
-    </item>
-    <item
-        jar="/Users/justinkhoo/Downloads/sensortag-android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.1.71/classes.jar"
+        jar="/Users/justinkhoo/HackSC_IRIS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.1.71/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="0f6d5c1ef2e982c3b7858408e3df389cf5d202da">
-        <dex dex="/Users/justinkhoo/Downloads/sensortag-android/app/build/intermediates/pre-dexed/debug/classes-8ce344117d02c77ebb3b88c9542dd687d1a658a7.jar" />
+        <dex dex="/Users/justinkhoo/HackSC_IRIS/app/build/intermediates/pre-dexed/debug/classes-bd32b39ebda9f7eea38ab60c1d31bb7204970d6f.jar" />
+    </item>
+    <item
+        jar="/Users/justinkhoo/HackSC_IRIS/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
+        <dex dex="/Users/justinkhoo/HackSC_IRIS/app/build/intermediates/pre-dexed/debug/classes-fd60d1bb0a90b4026d14b7bccaf6f1a768b04fdf.jar" />
     </item>
 
 </items>

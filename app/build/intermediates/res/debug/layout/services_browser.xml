@@ -39,6 +39,15 @@
             <TextView
                 style="@style/ServiceHeaderItem"
                 android:text="@string/acc" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send"
+                android:id="@+id/button"
+                android:layout_column="3"
+                android:onClick="sendButtonOnClick" />
         </TableRow>
 
         <TableRow
@@ -220,4 +229,4 @@
         </TableRow>
         
         </TableLayout>
-</ScrollView><!-- From: file:/Users/justinkhoo/Downloads/sensortag-android/app/src/main/res/layout/services_browser.xml -->
+</ScrollView><!-- From: file:/Users/justinkhoo/HackSC_IRIS/app/src/main/res/layout/services_browser.xml -->

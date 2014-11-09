@@ -61,4 +61,4 @@
         android:padding="10dp"
         android:text="@string/button_scan" />
 
-</LinearLayout><!-- From: file:/Users/justinkhoo/Downloads/sensortag-android/app/src/main/res/layout/fragment_scan.xml -->
+</LinearLayout><!-- From: file:/Users/justinkhoo/HackSC_IRIS/app/src/main/res/layout/fragment_scan.xml -->

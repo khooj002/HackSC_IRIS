@@ -137,4 +137,4 @@
         android:onClick="onStart"
         android:text="@string/start_prog" />
 
-</LinearLayout><!-- From: file:/Users/justinkhoo/Downloads/sensortag-android/app/src/main/res/layout/activity_fwupdate.xml -->
+</LinearLayout><!-- From: file:/Users/justinkhoo/HackSC_IRIS/app/src/main/res/layout/activity_fwupdate.xml -->

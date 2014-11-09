@@ -216,14 +216,17 @@ public class DeviceView extends Fragment {
 			    + decimal.format(v.z) + "\n";
 			mGyrValue.setText(msg);
 		}
-
+            double tempe;
 		if (uuidStr.equals(SensorTagGatt.UUID_IRT_DATA.toString())) {
 			v = Sensor.IR_TEMPERATURE.convert(rawValue);
+
      ///////////////////////////////////////////////////replace v.x and v.y with longitude and latitude
             msg = decimal.format(latitude) + "\n" + decimal.format(longitude) + "\n";
             mAmbValue.setText(msg);    //geolocation
 
-            msg = decimal.format(v.y) + "\n";
+            tempe = v.y; //changing the temp from celsius to fahrenheit
+            tempe = ((tempe * 9 / 5.0) + 32);
+            msg = decimal.format(tempe) + "\n";
 			mObjValue.setText(msg);
 		}
 

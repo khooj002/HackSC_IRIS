@@ -56,7 +56,7 @@
     <string name="unitT3">uT\nuT\nuT\n</string>
     
     <string name="empty1">*\n*\n</string>
-    <string name="unitDeg">deg/C\n</string>
+    <string name="unitDeg">deg/F\n</string>
     <string name="degree1">Long deg\nLat deg\n</string>
     <string name="degree2">Lat deg\n</string>
     <string name="unitRH">%rH\n</string>

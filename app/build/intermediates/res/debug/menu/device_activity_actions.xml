@@ -20,4 +20,4 @@
         android:icon="@drawable/ic_action_about" 
         android:title="@string/about"/>
 
-</menu><!-- From: file:/Users/justinkhoo/Downloads/sensortag-android/app/src/main/res/menu/device_activity_actions.xml -->
+</menu><!-- From: file:/Users/justinkhoo/HackSC_IRIS/app/src/main/res/menu/device_activity_actions.xml -->

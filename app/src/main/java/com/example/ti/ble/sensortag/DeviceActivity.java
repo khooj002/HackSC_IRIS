@@ -54,11 +54,17 @@
  **************************************************************************************************/
 package com.example.ti.ble.sensortag;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -70,10 +76,12 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 // import android.util.Log;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -96,6 +104,16 @@ import com.google.android.gms.location.LocationRequest;
 
 import android.location.Location;
 import android.provider.Settings;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import android.provider.Settings.Secure;
 
 public class DeviceActivity extends ViewPagerActivity implements
         GooglePlayServicesClient.ConnectionCallbacks,
@@ -133,7 +151,10 @@ public class DeviceActivity extends ViewPagerActivity implements
 	private boolean mIsSensorTag2;
 	private String mFwRev;
 
-	public DeviceActivity() {
+    double currTemp, currLati, currLongi, humid;
+
+    private String androidId;
+    public DeviceActivity() {
 		mResourceFragmentPager = R.layout.fragment_pager;
 		mResourceIdPager = R.id.pager;
 		mFwRev = new String("1.5"); // Assuming all SensorTags are up to date until actual FW revision is read
@@ -187,6 +208,8 @@ public class DeviceActivity extends ViewPagerActivity implements
 
 		// Initialize sensor list
 		updateSensorList();
+        TestAlert("OnCreate");
+
 	}
 
     @Override
@@ -247,8 +270,9 @@ public class DeviceActivity extends ViewPagerActivity implements
     public void onLocationChanged(Location location) {
         Toast.makeText(this, "Location changed.", Toast.LENGTH_SHORT).show();
         mCurrentLocation = mLocationClient.getLastLocation();
-
-        mDeviceView.updatelocation(mCurrentLocation.getLongitude(), mCurrentLocation.getLatitude());
+        currLati = mCurrentLocation.getLatitude();
+        currLongi = mCurrentLocation.getLongitude();
+        mDeviceView.updatelocation(currLati, currLongi);
     }
 	@Override
 	public void onDestroy() {
@@ -674,6 +698,12 @@ public class DeviceActivity extends ViewPagerActivity implements
 			}
             //mDeviceView.updatelocation(mCurrentLocation.getLongitude(), mCurrentLocation.getLatitude());
 			mDeviceView.onCharacteristicChanged(uuidStr, value);
+            if (uuidStr.equals(SensorTagGatt.UUID_IRT_DATA.toString())) {
+                currTemp = Sensor.IR_TEMPERATURE.convert(value).y;
+            }
+            if (uuidStr.equals(SensorTagGatt.UUID_HUM_DATA.toString())) {
+                humid = Sensor.HUMIDITY.convert(value).x;
+            }
 		}
 	}
 
@@ -710,5 +740,134 @@ public class DeviceActivity extends ViewPagerActivity implements
 			BarometerCalibrationCoefficients.INSTANCE.barometerCalibrationCoefficients = cal;
 		}
 	}
+
+    private void TestAlert(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DeviceActivity.this);
+
+        builder.setTitle("Test");
+        builder.setPositiveButton("OK", null);
+        builder.setMessage(message);
+
+        AlertDialog theAlertDialog = builder.create();
+        theAlertDialog.show();
+    }
+
+
+    private void sendTempAndLoc(String id, double temp, double lati, double longi, double humid){
+        HttpClient httpClient = new DefaultHttpClient();
+        String url = "https://hacksc-iris.azure-mobile.net/api/temperature?";
+
+        List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
+
+        temp = ((temp * 9 / 5.0) + 32); //changing the temp from celsius to fahrenheit
+
+        params.add(new BasicNameValuePair("lat", String.valueOf(lati)));
+        params.add(new BasicNameValuePair("long", String.valueOf(longi)));
+        params.add(new BasicNameValuePair("device_id", id));
+        params.add(new BasicNameValuePair("temp", String.valueOf(temp)));
+        params.add(new BasicNameValuePair("humid", String.valueOf(humid)));
+
+        String paramString = URLEncodedUtils.format(params, "utf-8");
+
+        url += paramString;
+
+
+        //HttpPost httpPost = new HttpPost("https://hacksc-iris.azure-mobile.net/api/temperature?device_id=mikeyoon&temp=97&lat=38&long=88");
+        HttpPost httpPost = new HttpPost(url);
+        //temp=11&long=22&lat=55
+        //InputStream inputStream = null;
+        //String result;
+        new MyHttpPost().execute(httpPost);
+//        try{
+//            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+//            nameValuePairs.add(new BasicNameValuePair("device_id", id));
+//            nameValuePairs.add(new BasicNameValuePair("temp", Double.toString(temp)));
+//            nameValuePairs.add(new BasicNameValuePair("lat", Double.toString(lati)));
+//            nameValuePairs.add(new BasicNameValuePair("long", Double.toString(longi)));
+//
+//            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//
+//            new MyHttpPost().execute(httpPost);
+//
+//        }catch(IOException e) {
+//
+//            TestAlert("Send fail");
+//        }
+    }
+
+
+
+    private class MyHttpPost extends AsyncTask<HttpPost, Void, String> {
+
+        @Override
+        protected String doInBackground(HttpPost... postUrl) {
+            return POST(postUrl[0]);
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            //Toast.makeText( getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
+            /*try{
+                JSONObject jsonLoginResult = new JSONObject(result);
+                if( jsonLoginResult.getBoolean("success") ){
+                    //will save our auth_token in our SharedPreferences
+                    //SharedPreferences.Editor preferencesEditor = savedData.edit();
+                    //preferencesEditor.putString("auth_token", jsonLoginResult.getJSONObject("user").getString("auth_token"));
+                }
+                else{
+                    //invalidEntryAlert("Invalid username or password. Please try again.");
+                }
+            }
+            catch(JSONException e){
+                //do nothing
+            }*/
+
+            TestAlert(result);
+
+        }
+
+        public String POST(HttpPost postUrl){
+            InputStream inputStream = null;
+            String result = "";
+            try {
+                // create HttpClient
+                HttpClient httpclient = new DefaultHttpClient();
+
+                // make POST request to the given URL
+                HttpResponse httpResponse = httpclient.execute(postUrl);
+
+                // receive response as inputStream
+                inputStream = httpResponse.getEntity().getContent();
+
+                // convert inputstream to string
+                if(inputStream != null)
+                    result = convertInputStreamToString(inputStream);
+                else
+                    result = "Did not work!";
+
+            } catch (Exception e) {
+                Log.d("InputStream", e.getLocalizedMessage());
+            }
+
+            return result;
+        }
+
+        private String convertInputStreamToString(InputStream inputStream) throws IOException {
+            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+            String line = "";
+            String result = "";
+            while((line = bufferedReader.readLine()) != null)
+                result += line;
+
+            inputStream.close();
+            return result;
+        }
+    }
+
+    public void sendButtonOnClick(View view){
+        androidId = Secure.getString( getContentResolver(), Secure.ANDROID_ID);
+        sendTempAndLoc(androidId, currTemp, currLati, currLongi, humid);
+    }
 
 }

@@ -46,4 +46,4 @@
         android:layout_margin="0dp"
         android:text="@android:string/ok" />
 
-</LinearLayout><!-- From: file:/Users/justinkhoo/Downloads/sensortag-android/app/src/main/res/layout/dialog_about.xml -->
+</LinearLayout><!-- From: file:/Users/justinkhoo/HackSC_IRIS/app/src/main/res/layout/dialog_about.xml -->
